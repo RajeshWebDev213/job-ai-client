@@ -1,5 +1,5 @@
 // src/pages/Home.jsx
-
+import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobCard from "../components/JobCard";
@@ -7,8 +7,20 @@ import JobCard from "../components/JobCard";
 import heroImg from "../assets/heroImg.png";
 
 import googleLogo from "../assets/google.png";
-import amazonLogo from "../assets/amazon.png";
 import microsoftLogo from "../assets/microsoft.png";
+import amazonLogo from "../assets/amazon.png";
+import netflixLogo from "../assets/netflix.png";
+import metaLogo from "../assets/meta.png";
+ import appleLogo from "../assets/apple.png";
+
+const companyLogos = [
+  googleLogo,
+  microsoftLogo,
+  amazonLogo,
+  netflixLogo,
+  metaLogo,
+   appleLogo,
+];
 
 const sampleJobs = [
   {
@@ -64,9 +76,7 @@ export default function Home() {
 
             {/* Heading */}
             <h1 className="text-[64px] leading-[74px] font-bold text-[#0f172a]">
-              Find Your Dream Job
-              <br />
-              with{" "}
+              Find Your Dream Job with{" "}
               <span className="text-[#5b4df5]">
                 AI-Powered
               </span>
@@ -93,27 +103,27 @@ export default function Home() {
             </div>
 
             {/* Search Box */}
-            <div className="mt-14 bg-white rounded-[28px] shadow-xl p-5 flex flex-col md:flex-row gap-4 border border-[#ececff]">
+       <div className="mt-14 bg-white rounded-[20px] shadow-xl p-4 flex flex-col md:flex-row items-center gap-4 border border-[#ececff]">
 
-              {/* Job Input */}
-              <input
-                type="text"
-                placeholder="Job title or keyword"
-                className="flex-1 border border-[#e5e7eb] rounded-2xl px-5 py-4 outline-none text-lg"
-              />
+  {/* Job Input */}
+  <input
+    type="text"
+    placeholder="Job title or keyword"
+    className="flex-1 w-full border border-[#e5e7eb] rounded-2xl px-5 h-[60px] outline-none text-lg"
+  />
 
-              {/* Location Input */}
-              <input
-                type="text"
-                placeholder="Location"
-                className="flex-1 border border-[#e5e7eb] rounded-2xl px-5 py-4 outline-none text-lg"
-              />
+  {/* Location Input */}
+  <input
+    type="text"
+    placeholder="Location"
+    className="flex-1 w-full border border-[#e5e7eb] rounded-2xl px-5 h-[60px] outline-none text-lg"
+  />
 
-              {/* Search Button */}
-              <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-10 py-4 rounded-2xl text-lg font-semibold transition">
-                Search
-              </button>
-            </div>
+  {/* Search Button */}
+  <button className="w-full md:w-auto bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-10 h-[60px] rounded-2xl text-lg font-semibold transition whitespace-nowrap">
+    Search
+  </button>
+</div>
           </div>
 
           {/* Right Hero Image */}
@@ -124,43 +134,44 @@ export default function Home() {
             <img
               src={heroImg}
               alt="Hero"
-              className="w-full max-w-[720px] animate-float"
+              className="w-full max-w-[720px] mt-[-250px]  animate-float"
             />
           </div>
         </div>
       </section>
 
-      {/* Trusted Companies */}
-      <section className="py-20 bg-white overflow-hidden">
+{/* Trusted Companies */}
+<section className="py-6 bg-white overflow-hidden">
 
-        <div className="max-w-7xl mx-auto px-6">
+  <div className="max-w-7xl mx-auto px-6">
 
-          <h2 className="text-center text-[36px] font-bold text-[#0f172a] mb-14">
-            Trusted by Top Companies
-          </h2>
+    {/* Heading */}
+    <h2 className="text-center text-[28px] font-bold text-[#0f172a] mb-6">
+      Trusted by Top Companies
+    </h2>
 
-          {/* Moving Logos */}
-          <div className="flex animate-marquee gap-8 w-max">
+    {/* Moving Logos */}
+    <div className="overflow-hidden w-full">
 
-            {[
-              "Google",
-              "Microsoft",
-              "Amazon",
-              "Netflix",
-              "Meta",
-              "Apple",
-            ].map((company, index) => (
+      <div className="flex animate-marquee whitespace-nowrap">
 
-              <div
-                key={index}
-                className="bg-white min-w-[220px] h-[110px] rounded-3xl shadow-md border border-[#ececff] flex items-center justify-center text-[28px] font-bold text-[#0f172a] hover:shadow-xl hover:-translate-y-1 transition duration-300"
-              >
-                {company}
-              </div>
-            ))}
+        {[...companyLogos, ...companyLogos].map((logo, index) => (
+
+          <div
+            key={index}
+            className="bg-white min-w-[180px] h-[80px] rounded-2xl shadow-sm border border-[#ececff] flex items-center justify-center hover:shadow-md hover:-translate-y-1 transition duration-300 mx-3"
+          >
+            <img
+              src={logo}
+              alt="Company Logo"
+              className="h-8 object-contain"
+            />
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Featured Jobs */}
       <section className="max-w-7xl mx-auto px-6 py-20">
@@ -171,9 +182,9 @@ export default function Home() {
             Featured Jobs
           </h2>
 
-          <button className="text-[#5b4df5] font-semibold text-lg hover:underline">
+         <Link to={"/jobs"}><button className="text-[#5b4df5] font-semibold text-lg hover:underline">
             View all jobs →
-          </button>
+          </button></Link>
         </div>
 
         {/* Job Cards */}

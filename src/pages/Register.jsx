@@ -1,28 +1,149 @@
-import { Link } from "react-router-dom";
+// src/pages/Register.jsx
+
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Register() {
+
+  const navigate = useNavigate();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const [errors, setErrors] = useState({});
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    let newErrors = {};
+
+    if (!name.trim()) {
+      newErrors.name = "Full name is required";
+    }
+
+    if (!email.trim()) {
+      newErrors.email = "Email is required";
+    }
+
+    if (!password.trim()) {
+      newErrors.password = "Password is required";
+    }
+
+    setErrors(newErrors);
+
+    // If no errors
+    if (Object.keys(newErrors).length === 0) {
+
+      alert("Registration Successful ✅");
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("username", name);
+      navigate("/");
+     
+    }
+  };
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
-      <div className="bg-white shadow-lg rounded-2xl p-8 w-full max-w-md">
-        <h1 className="text-3xl font-bold text-center mb-6">Register</h1>
+    <div className="min-h-screen bg-[#f7f7ff] flex items-center justify-center px-6">
 
-        <form className="space-y-4">
-          <input type="text" placeholder="Full Name" className="w-full border rounded-lg px-4 py-3" />
-          <input type="email" placeholder="Email" className="w-full border rounded-lg px-4 py-3" />
-          <input type="password" placeholder="Password" className="w-full border rounded-lg px-4 py-3" />
+      <div className="bg-white shadow-xl rounded-[32px] p-10 w-full max-w-md border border-[#ececff]">
 
-          <select className="w-full border rounded-lg px-4 py-3">
-            <option>Student</option>
-            <option>Recruiter</option>
-          </select>
+        <h1 className="text-4xl font-bold text-[#0f172a] text-center">
+          Create Account
+        </h1>
 
-          <button className="w-full bg-blue-600 text-white py-3 rounded-lg">
+        <p className="text-[#64748b] text-center mt-4">
+          Join JobAI and discover your dream job.
+        </p>
+
+        <form onSubmit={handleRegister} className="mt-10 space-y-6">
+
+          {/* Name */}
+          <div>
+
+            <input
+              type="text"
+              placeholder="Full Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`w-full border rounded-2xl px-5 py-4 outline-none text-lg ${
+                errors.name
+                  ? "border-red-500"
+                  : "border-[#e5e7eb]"
+              }`}
+            />
+
+            {errors.name && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.name}
+              </p>
+            )}
+          </div>
+
+          {/* Email */}
+          <div>
+
+            <input
+              type="email"
+              placeholder="Email Address"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className={`w-full border rounded-2xl px-5 py-4 outline-none text-lg ${
+                errors.email
+                  ? "border-red-500"
+                  : "border-[#e5e7eb]"
+              }`}
+            />
+
+            {errors.email && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.email}
+              </p>
+            )}
+          </div>
+
+          {/* Password */}
+          <div>
+
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className={`w-full border rounded-2xl px-5 py-4 outline-none text-lg ${
+                errors.password
+                  ? "border-red-500"
+                  : "border-[#e5e7eb]"
+              }`}
+            />
+
+            {errors.password && (
+              <p className="text-red-500 text-sm mt-2">
+                {errors.password}
+              </p>
+            )}
+          </div>
+
+          {/* Button */}
+          <button
+            type="submit"
+            className="w-full bg-[#5b4df5] hover:bg-[#4f46e5] text-white py-4 rounded-2xl text-lg font-semibold transition"
+          >
             Create Account
           </button>
         </form>
 
-        <p className="text-center mt-4 text-slate-600">
-          Already have an account? <Link to="/login" className="text-blue-600">Login</Link>
+        <p className="text-center text-[#64748b] mt-8">
+
+          Already have an account?{" "}
+
+          <Link
+            to="/login"
+            className="text-[#5b4df5] font-semibold hover:underline"
+          >
+            Login
+          </Link>
         </p>
       </div>
     </div>

@@ -13,7 +13,7 @@ const JobCard = ({ job }) => {
           <img
             src={job.logo}
             alt={job.company}
-            className="w-12 h-12 object-contain rounded-lg border p-2"
+            className="w-12 h-12 object-contain rounded-lg  p-2"
           />
 
           <div>

@@ -24,28 +24,53 @@ const Navbar = () => {
         </div>
 
         {/* Right Side */}
-        <div className="flex items-center gap-3">
-          {!isLoggedIn ? (
-            <>
-              <Link
-                to="/login"
-                className="px-4 py-2 text-slate-700 hover:text-blue-600"
-              >
-                Login
-              </Link>
-              <Link
-                to="/register"
-                className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
-              >
-                Register
-              </Link>
-            </>
-          ) : (
-            <Link to="/dashboard">
-              <User className="w-6 h-6 text-slate-700" />
-            </Link>
-          )}
-        </div>
+        {/* Auth Buttons */}
+
+<div className="flex items-center gap-5">
+
+  {localStorage.getItem("isLoggedIn") ? (
+
+    <>
+      {/* Profile */}
+    <div className="w-10 h-10 rounded-full bg-[#5b4df5] text-white flex items-center justify-center font-bold text-sm uppercase">
+  {localStorage
+    .getItem("username")
+    ?.split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)}
+</div>
+
+      {/* Logout */}
+      <button
+        onClick={() => {
+          localStorage.removeItem("isLoggedIn");
+          window.location.reload();
+        }}
+className="border border-red-500 text-red-500 px-4 py-2 rounded-xl text-sm hover:bg-red-50 transition"      >
+        Logout
+      </button>
+    </>
+
+  ) : (
+
+    <>
+      {/* Login */}
+      <Link
+        to="/login"
+className="border border-[#d4d4d8] px-5 py-2.5 rounded-xl text-[15px] font-semibold text-[#0f172a] hover:border-[#5b4df5] transition"      >
+        Login
+      </Link>
+
+      {/* Register */}
+      <Link
+        to="/register"
+className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-5 py-2.5 rounded-xl text-[15px] font-semibold shadow-md transition"      >
+        Register
+      </Link>
+    </>
+  )}
+</div>
       </nav>
     </header>
   );
