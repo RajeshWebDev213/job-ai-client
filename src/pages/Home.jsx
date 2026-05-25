@@ -1,5 +1,7 @@
 // src/pages/Home.jsx
+
 import { Link } from "react-router-dom";
+
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobCard from "../components/JobCard";
@@ -11,7 +13,7 @@ import microsoftLogo from "../assets/microsoft.png";
 import amazonLogo from "../assets/amazon.png";
 import netflixLogo from "../assets/netflix.png";
 import metaLogo from "../assets/meta.png";
- import appleLogo from "../assets/apple.png";
+import appleLogo from "../assets/apple.png";
 
 const companyLogos = [
   googleLogo,
@@ -19,7 +21,7 @@ const companyLogos = [
   amazonLogo,
   netflixLogo,
   metaLogo,
-   appleLogo,
+  appleLogo,
 ];
 
 const sampleJobs = [
@@ -33,6 +35,7 @@ const sampleJobs = [
     salary: "10 LPA",
     experience: "1+ Years",
   },
+
   {
     _id: "2",
     title: "MERN Stack Developer",
@@ -43,6 +46,7 @@ const sampleJobs = [
     salary: "12 LPA",
     experience: "2+ Years",
   },
+
   {
     _id: "3",
     title: "Backend Developer",
@@ -56,145 +60,274 @@ const sampleJobs = [
 ];
 
 export default function Home() {
+
   return (
     <>
       {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="bg-[#f7f7ff] py-20 overflow-hidden">
+      {/* HERO SECTION */}
+      <section className="bg-[#f8fafc] overflow-hidden pt-12 pb-20">
 
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
 
-          {/* Left Content */}
+          {/* LEFT */}
           <div>
 
-            {/* Small Badge */}
+            {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-[#ede9fe] text-[#5b4df5] px-4 py-2 rounded-full text-sm font-medium mb-6">
-              ✨ AI-Powered Job Matching
+              AI-Powered Job Matching
             </div>
 
             {/* Heading */}
-            <h1 className="text-[64px] leading-[74px] font-bold text-[#0f172a]">
-              Find Your Dream Job with{" "}
-              <span className="text-[#5b4df5]">
-                AI-Powered
-              </span>
+            <h1 className="text-[52px] leading-[62px] font-bold text-gray-900">
+
+              Find Your Dream Job
               <br />
-              Matching
+
+              with Smart AI Matching
             </h1>
 
             {/* Description */}
-            <p className="mt-8 text-[22px] leading-[40px] text-[#475569] max-w-xl">
-              Discover opportunities tailored to your skills
-              and experience.
+            <p className="mt-6 text-lg leading-8 text-gray-600 max-w-xl">
+
+              Discover opportunities tailored to your skills,
+              experience, and career goals.
             </p>
 
             {/* Buttons */}
-            <div className="flex gap-5 mt-10">
+            <div className="flex flex-wrap gap-4 mt-10">
 
-              <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-10 py-5 rounded-2xl text-lg font-semibold shadow-lg transition">
-                Explore Jobs
-              </button>
+              <Link to="/jobs">
 
-              <button className="border-2 border-[#5b4df5] text-[#5b4df5] hover:bg-[#ede9fe] px-10 py-5 rounded-2xl text-lg font-semibold transition">
+                <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-7 py-3.5 rounded-xl font-semibold transition">
+                  Explore Jobs
+                </button>
+              </Link>
+
+              <button className="border border-gray-300 hover:border-[#5b4df5] hover:text-[#5b4df5] px-7 py-3.5 rounded-xl font-semibold transition">
                 Post a Job
               </button>
             </div>
 
             {/* Search Box */}
-       <div className="mt-14 bg-white rounded-[20px] shadow-xl p-4 flex flex-col md:flex-row items-center gap-4 border border-[#ececff]">
+            <div className="mt-12 bg-white border border-gray-200 rounded-2xl p-4 flex flex-col md:flex-row items-center gap-4 shadow-sm">
 
-  {/* Job Input */}
-  <input
-    type="text"
-    placeholder="Job title or keyword"
-    className="flex-1 w-full border border-[#e5e7eb] rounded-2xl px-5 h-[60px] outline-none text-lg"
-  />
+              {/* Job Input */}
+              <input
+                type="text"
+                placeholder="Job title or keyword"
+                className="flex-1 w-full border border-gray-200 rounded-xl px-5 h-[56px] outline-none"
+              />
 
-  {/* Location Input */}
-  <input
-    type="text"
-    placeholder="Location"
-    className="flex-1 w-full border border-[#e5e7eb] rounded-2xl px-5 h-[60px] outline-none text-lg"
-  />
+              {/* Location */}
+              <input
+                type="text"
+                placeholder="Location"
+                className="flex-1 w-full border border-gray-200 rounded-xl px-5 h-[56px] outline-none"
+              />
 
-  {/* Search Button */}
-  <button className="w-full md:w-auto bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-10 h-[60px] rounded-2xl text-lg font-semibold transition whitespace-nowrap">
-    Search
-  </button>
-</div>
+              {/* Button */}
+              <button className="w-full md:w-auto bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-8 h-[56px] rounded-xl font-semibold transition">
+                Search
+              </button>
+            </div>
           </div>
 
-          {/* Right Hero Image */}
-          <div className="flex justify-center relative">
-
-  
+          {/* RIGHT IMAGE */}
+          <div className="flex justify-center">
 
             <img
               src={heroImg}
               alt="Hero"
-              className="w-full max-w-[720px] mt-[-250px]  animate-float"
+              className="w-full max-w-[560px]"
             />
           </div>
         </div>
       </section>
 
-{/* Trusted Companies */}
-<section className="py-6 bg-white overflow-hidden">
+      {/* TRUSTED COMPANIES */}
+      <section className="bg-white py-10 overflow-hidden border-y border-gray-100">
 
-  <div className="max-w-7xl mx-auto px-6">
+        <div className="max-w-7xl mx-auto px-6">
 
-    {/* Heading */}
-    <h2 className="text-center text-[28px] font-bold text-[#0f172a] mb-6">
-      Trusted by Top Companies
-    </h2>
+          {/* Heading */}
+          <div className="text-center mb-8">
 
-    {/* Moving Logos */}
-    <div className="overflow-hidden w-full">
-
-      <div className="flex animate-marquee whitespace-nowrap">
-
-        {[...companyLogos, ...companyLogos].map((logo, index) => (
-
-          <div
-            key={index}
-            className="bg-white min-w-[180px] h-[80px] rounded-2xl shadow-sm border border-[#ececff] flex items-center justify-center hover:shadow-md hover:-translate-y-1 transition duration-300 mx-3"
-          >
-            <img
-              src={logo}
-              alt="Company Logo"
-              className="h-8 object-contain"
-            />
+            <h2 className="text-2xl font-bold text-gray-900">
+              Trusted by Top Companies
+            </h2>
           </div>
-        ))}
-      </div>
-    </div>
-  </div>
-</section>
 
-      {/* Featured Jobs */}
-      <section className="max-w-7xl mx-auto px-6 py-20">
+          {/* Marquee */}
+          <div className="overflow-hidden">
 
-        <div className="flex justify-between items-center mb-10">
+            <div className="flex animate-marquee whitespace-nowrap">
 
-          <h2 className="text-4xl font-bold text-[#0f172a]">
-            Featured Jobs
-          </h2>
+              {[...companyLogos, ...companyLogos].map((logo, index) => (
 
-         <Link to={"/jobs"}><button className="text-[#5b4df5] font-semibold text-lg hover:underline">
-            View all jobs →
-          </button></Link>
-        </div>
-
-        {/* Job Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-
-          {sampleJobs.map((job) => (
-            <JobCard key={job._id} job={job} />
-          ))}
+                <div
+                  key={index}
+                  className="bg-white min-w-[170px] h-[75px] border border-gray-200 rounded-2xl flex items-center justify-center mx-3 hover:shadow-md transition"
+                >
+                  <img
+                    src={logo}
+                    alt="logo"
+                    className="h-8 object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
+
+      {/* POPULAR CATEGORIES */}
+      <section className="bg-[#f8fafc] py-16">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="mb-10">
+
+            <h2 className="text-3xl font-bold text-gray-900">
+              Popular Categories
+            </h2>
+
+            <p className="text-gray-500 mt-2">
+              Explore jobs by category
+            </p>
+          </div>
+
+          {/* Categories */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            {[
+              "Frontend Development",
+              "Backend Development",
+              "UI/UX Design",
+              "AI & Machine Learning",
+              "DevOps",
+              "Mobile Development",
+              "Data Science",
+              "Cloud Engineering",
+            ].map((category, index) => (
+
+              <div
+                key={index}
+                className="bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-lg transition"
+              >
+                <h3 className="text-lg font-semibold text-gray-900">
+                  {category}
+                </h3>
+
+                <p className="text-sm text-gray-500 mt-2">
+                  120+ Jobs Available
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FEATURED JOBS */}
+      <section className="bg-white py-20">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-10">
+
+            <div>
+
+              <h2 className="text-4xl font-bold text-gray-900">
+                Featured Jobs
+              </h2>
+
+              <p className="text-gray-500 mt-3">
+                Find the latest opportunities from top companies
+              </p>
+            </div>
+
+            <Link to="/jobs">
+
+              <button className="text-[#5b4df5] font-semibold hover:underline">
+                View All Jobs →
+              </button>
+            </Link>
+          </div>
+
+          {/* Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            {sampleJobs.map((job) => (
+              <JobCard key={job._id} job={job} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="bg-[#f8fafc] py-20 border-t border-gray-200">
+
+        <div className="max-w-7xl mx-auto px-6">
+
+          {/* Heading */}
+          <div className="text-center mb-16">
+
+            <h2 className="text-4xl font-bold text-gray-900">
+              Why Choose JobAI
+            </h2>
+
+            <p className="text-gray-500 mt-4 max-w-2xl mx-auto">
+              Find jobs faster with AI-powered matching
+              and smart recommendations.
+            </p>
+          </div>
+
+          {/* Features */}
+          <div className="grid md:grid-cols-3 gap-8">
+
+            {/* Feature */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8">
+
+              <h3 className="text-2xl font-semibold text-gray-900">
+                AI Matching
+              </h3>
+
+              <p className="text-gray-500 mt-4 leading-7">
+                Get personalized job recommendations based on your skills.
+              </p>
+            </div>
+
+            {/* Feature */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8">
+
+              <h3 className="text-2xl font-semibold text-gray-900">
+                Top Companies
+              </h3>
+
+              <p className="text-gray-500 mt-4 leading-7">
+                Connect with leading tech companies worldwide.
+              </p>
+            </div>
+
+            {/* Feature */}
+            <div className="bg-white border border-gray-200 rounded-2xl p-8">
+
+              <h3 className="text-2xl font-semibold text-gray-900">
+                Fast Hiring
+              </h3>
+
+              <p className="text-gray-500 mt-4 leading-7">
+                Apply instantly and track applications in real time.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    
 
       {/* Footer */}
       <Footer />
