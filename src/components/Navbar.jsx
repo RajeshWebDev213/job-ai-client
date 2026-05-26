@@ -1,76 +1,159 @@
-import { Link } from "react-router-dom";
-import { Briefcase, User } from "lucide-react";
+// src/components/Navbar.jsx
+
+import { Link, useNavigate } from "react-router-dom";
+
+import {
+  Briefcase,
+  User,
+} from "lucide-react";
 
 const Navbar = () => {
-  const isLoggedIn = false;
+
+  const navigate = useNavigate();
+
+  // Get User
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  // Logout
+  const handleLogout = () => {
+
+    localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("username");
+
+    navigate("/");
+    window.location.reload();
+  };
+
+  // Profile Redirect
+  const handleProfile = () => {
+
+    // Not logged in
+    if (!user || !user.isLoggedIn) {
+
+      navigate("/login");
+      return;
+    }
+
+    // Student
+    if (user.role === "student") {
+
+      navigate("/student-dashboard");
+    }
+
+    // Recruiter
+    else if (user.role === "recruiter") {
+
+      navigate("/recruiter-dashboard");
+    }
+  };
 
   return (
-    <header className="bg-white shadow-sm sticky top-0 z-50">
-      <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+
+    <header className="bg-white border-b border-gray-100 sticky top-0 z-50">
+
+      <nav className="max-w-7xl mx-auto px-6 h-[78px] flex items-center justify-between">
+
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
-          <Briefcase className="w-7 h-7 text-blue-600" />
-          <span className="text-2xl font-bold text-slate-800">
-            Job<span className="text-blue-600">AI</span>
-          </span>
+        <Link
+          to="/"
+          className="flex items-center gap-3"
+        >
+
+          <div className="w-11 h-11 rounded-xl bg-[#5b4df5] text-white flex items-center justify-center">
+
+            <Briefcase size={22} />
+          </div>
+
+          <h1 className="text-2xl font-bold text-gray-900">
+
+            Job<span className="text-[#5b4df5]">AI</span>
+          </h1>
         </Link>
 
-        {/* Navigation Links */}
-        <div className="hidden md:flex items-center gap-6 text-slate-600 font-medium">
-          <Link to="/">Home</Link>
-          <Link to="/jobs">Jobs</Link>
-          <Link to="/companies">Companies</Link>
-          <Link to="/about">About</Link>
+        {/* Navigation */}
+        <div className="hidden md:flex items-center gap-8 text-[15px] font-medium text-gray-600">
+
+          <Link
+            to="/"
+            className="hover:text-[#5b4df5] transition"
+          >
+            Home
+          </Link>
+
+          <Link
+            to="/jobs"
+            className="hover:text-[#5b4df5] transition"
+          >
+            Jobs
+          </Link>
+
+          <Link
+            to="/companies"
+            className="hover:text-[#5b4df5] transition"
+          >
+            Companies
+          </Link>
+
+          <Link
+            to="/about"
+            className="hover:text-[#5b4df5] transition"
+          >
+            About
+          </Link>
         </div>
 
         {/* Right Side */}
-        {/* Auth Buttons */}
+        <div className="flex items-center gap-4">
 
-<div className="flex items-center gap-5">
+          {user?.isLoggedIn ? (
 
-  {localStorage.getItem("isLoggedIn") ? (
+            <>
+              {/* Profile */}
+              <button
+                onClick={handleProfile}
+                className="w-11 h-11 rounded-full bg-[#5b4df5] text-white flex items-center justify-center font-bold text-sm uppercase hover:bg-[#4f46e5] transition"
+              >
 
-    <>
-      {/* Profile */}
-    <div className="w-10 h-10 rounded-full bg-[#5b4df5] text-white flex items-center justify-center font-bold text-sm uppercase">
-  {localStorage
-    .getItem("username")
-    ?.split(" ")
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)}
-</div>
+                {user?.username
+                  ?.split(" ")
+                  .map((word) => word[0])
+                  .join("")
+                  .slice(0, 2)}
+              </button>
 
-      {/* Logout */}
-      <button
-        onClick={() => {
-          localStorage.removeItem("isLoggedIn");
-          window.location.reload();
-        }}
-className="border border-red-500 text-red-500 px-4 py-2 rounded-xl text-sm hover:bg-red-50 transition"      >
-        Logout
-      </button>
-    </>
+              {/* Logout */}
+              <button
+                onClick={handleLogout}
+                className="border border-red-500 text-red-500 px-5 h-[42px] rounded-xl text-sm font-medium hover:bg-red-50 transition"
+              >
+                Logout
+              </button>
+            </>
 
-  ) : (
+          ) : (
 
-    <>
-      {/* Login */}
-      <Link
-        to="/login"
-className="border border-[#d4d4d8] px-5 py-2.5 rounded-xl text-[15px] font-semibold text-[#0f172a] hover:border-[#5b4df5] transition"      >
-        Login
-      </Link>
+            <>
+              {/* Login */}
+              <Link
+                to="/login"
+                className="border border-gray-300 px-5 h-[42px] rounded-xl text-sm font-semibold text-gray-800 hover:border-[#5b4df5] hover:text-[#5b4df5] flex items-center transition"
+              >
+                Login
+              </Link>
 
-      {/* Register */}
-      <Link
-        to="/register"
-className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-5 py-2.5 rounded-xl text-[15px] font-semibold shadow-md transition"      >
-        Register
-      </Link>
-    </>
-  )}
-</div>
+              {/* Register */}
+              <Link
+                to="/register"
+                className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-5 h-[42px] rounded-xl text-sm font-semibold flex items-center shadow-sm transition"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
       </nav>
     </header>
   );

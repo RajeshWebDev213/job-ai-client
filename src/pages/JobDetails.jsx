@@ -99,7 +99,11 @@ export default function JobDetails() {
                 </div>
 
                 {/* Apply */}
-                <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-6 py-3 rounded-lg font-medium transition">
+                <button
+                 onClick={() =>
+            navigate(`/apply/${job._id}`)
+          }
+                className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-6 py-3 rounded-lg font-medium transition">
                   Apply Now
                 </button>
               </div>
@@ -228,7 +232,11 @@ export default function JobDetails() {
                   Submit your application and start your career journey.
                 </p>
 
-                <button className="mt-6 w-full bg-white text-[#5b4df5] py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                <button 
+                 onClick={() =>
+            navigate(`/apply/${job._id}`)
+          }
+                className="mt-6 w-full bg-white text-[#5b4df5] py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
                   Apply Now
                 </button>
               </div>

@@ -10,39 +10,61 @@ export default function Register() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
 
   const [errors, setErrors] = useState({});
 
   const handleRegister = (e) => {
-    e.preventDefault();
 
-    let newErrors = {};
+  e.preventDefault();
 
-    if (!name.trim()) {
-      newErrors.name = "Full name is required";
-    }
+  let newErrors = {};
 
-    if (!email.trim()) {
-      newErrors.email = "Email is required";
-    }
+  // Validation
+  if (!name.trim()) {
+    newErrors.name = "Full name is required";
+  }
 
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
-    }
+  if (!email.trim()) {
+    newErrors.email = "Email is required";
+  }
 
-    setErrors(newErrors);
+  if (!password.trim()) {
+    newErrors.password = "Password is required";
+  }
 
-    // If no errors
-    if (Object.keys(newErrors).length === 0) {
+  if (!role) {
+    newErrors.role = "Please select a role";
+  }
 
-      alert("Registration Successful ✅");
+  // Set Errors
+  setErrors(newErrors);
 
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("username", name);
-      navigate("/");
-     
-    }
-  };
+  // Stop if errors exist
+  if (Object.keys(newErrors).length > 0) {
+    return;
+  }
+
+  // Save User
+  localStorage.setItem(
+    "user",
+    JSON.stringify({
+      username: name,
+      email,
+      role,
+      isLoggedIn: true,
+    })
+  );
+
+  // Optional
+  localStorage.setItem("isLoggedIn", "true");
+
+  // Success
+  alert("Registration Successful ✅");
+
+  // Go Home
+  navigate("/");
+};
 
   return (
     <div className="min-h-screen bg-[#f7f7ff] flex items-center justify-center px-6">
@@ -124,9 +146,33 @@ export default function Register() {
               </p>
             )}
           </div>
+          <select
+  value={role}
+  onChange={(e) => setRole(e.target.value)}
+  className="w-full border border-gray-200 rounded-xl px-5 h-[56px] outline-none"
+>
+
+  <option value="">
+    Select Role
+  </option>
+
+  <option value="student">
+    Student
+  </option>
+
+  <option value="recruiter">
+    Recruiter
+  </option>
+</select>
+{errors.role && (
+  <p className="text-red-500 text-sm mt-2">
+    {errors.role}
+  </p>
+)}
 
           {/* Button */}
           <button
+          
             type="submit"
             className="w-full bg-[#5b4df5] hover:bg-[#4f46e5] text-white py-4 rounded-2xl text-lg font-semibold transition"
           >

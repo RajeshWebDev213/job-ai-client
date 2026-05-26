@@ -6,6 +6,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import JobCard from "../components/JobCard";
 
+import {
+  Search,
+  MapPin,
+} from "lucide-react";
+
 // Logos
 import googleLogo from "../assets/google.png";
 import amazonLogo from "../assets/amazon.png";
@@ -25,6 +30,7 @@ const jobs = [
     salary: "10 LPA",
     experience: "1+ Years",
   },
+
   {
     _id: "2",
     title: "MERN Stack Developer",
@@ -35,6 +41,7 @@ const jobs = [
     salary: "12 LPA",
     experience: "2+ Years",
   },
+
   {
     _id: "3",
     title: "Backend Developer",
@@ -45,6 +52,7 @@ const jobs = [
     salary: "15 LPA",
     experience: "2+ Years",
   },
+
   {
     _id: "4",
     title: "UI/UX Designer",
@@ -55,6 +63,7 @@ const jobs = [
     salary: "18 LPA",
     experience: "3+ Years",
   },
+
   {
     _id: "5",
     title: "Data Scientist",
@@ -65,6 +74,7 @@ const jobs = [
     salary: "20 LPA",
     experience: "2+ Years",
   },
+
   {
     _id: "6",
     title: "React Developer Intern",
@@ -75,6 +85,7 @@ const jobs = [
     salary: "6 LPA",
     experience: "Fresher",
   },
+
   {
     _id: "7",
     title: "Full Stack Developer",
@@ -85,6 +96,7 @@ const jobs = [
     salary: "14 LPA",
     experience: "3+ Years",
   },
+
   {
     _id: "8",
     title: "Node.js Developer",
@@ -95,6 +107,7 @@ const jobs = [
     salary: "16 LPA",
     experience: "2+ Years",
   },
+
   {
     _id: "9",
     title: "React Native Developer",
@@ -114,23 +127,33 @@ export default function Jobs() {
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
 
-  // Filter + Search Logic
+  // Filter Logic
   const filteredJobs = jobs.filter((job) => {
 
-    // Filter by type
     const matchesFilter =
-      filter === "All" ? true : job.type === filter;
+      filter === "All"
+        ? true
+        : job.type === filter;
 
-    // Search by title/company
     const matchesSearch =
-      job.title.toLowerCase().includes(search.toLowerCase()) ||
-      job.company.toLowerCase().includes(search.toLowerCase());
+      job.title
+        .toLowerCase()
+        .includes(search.toLowerCase()) ||
 
-    // Search by location
+      job.company
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
     const matchesLocation =
-      job.location.toLowerCase().includes(location.toLowerCase());
+      job.location
+        .toLowerCase()
+        .includes(location.toLowerCase());
 
-    return matchesFilter && matchesSearch && matchesLocation;
+    return (
+      matchesFilter &&
+      matchesSearch &&
+      matchesLocation
+    );
   });
 
   return (
@@ -138,132 +161,153 @@ export default function Jobs() {
       {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="bg-[#f7f7ff] py-20">
+      {/* HERO */}
+      <section className="bg-[#f8fafc] py-12 border-b border-gray-100">
 
         <div className="max-w-7xl mx-auto px-6 text-center">
 
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#ede9fe] text-[#5b4df5] px-4 py-2 rounded-full text-sm font-medium mb-6">
-            🚀 Discover Your Next Opportunity
+          <div className="inline-flex items-center gap-2 bg-[#ede9fe] text-[#5b4df5] px-4 py-2 rounded-full text-sm font-medium mb-5">
+
+            Discover New Opportunities
           </div>
 
           {/* Heading */}
-          <h1 className="text-[64px] leading-[74px] font-bold text-[#0f172a]">
-            Explore Top Jobs
+          <h1 className="text-[48px] leading-[58px] font-bold text-gray-900">
+
+            Find Jobs from
             <br />
-            from Leading Companies
+
+            Top Companies
           </h1>
 
           {/* Description */}
-          <p className="mt-8 text-[22px] leading-[40px] text-[#475569] max-w-3xl mx-auto">
-            Browse thousands of opportunities tailored
-            to your skills and career goals.
+          <p className="mt-5 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
+
+            Explore thousands of jobs tailored to
+            your skills, experience, and career goals.
           </p>
 
           {/* Search Box */}
-          <div className="mt-14 bg-white rounded-[28px] shadow-xl p-5 flex flex-col md:flex-row gap-4 border border-[#ececff] max-w-5xl mx-auto">
+          <div className="mt-8 bg-white rounded-2xl shadow-sm p-4 flex flex-col md:flex-row gap-4 border border-gray-200 max-w-5xl mx-auto">
 
-            {/* Search Input */}
-            <input
-              type="text"
-              placeholder="Search jobs or companies..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="flex-1 border border-[#e5e7eb] rounded-2xl px-5 py-4 outline-none text-lg"
-            />
+            {/* Search */}
+            <div className="flex items-center flex-1 border border-gray-200 rounded-xl px-4 h-[54px]">
 
-            {/* Location Input */}
-            <input
-              type="text"
-              placeholder="Location"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="flex-1 border border-[#e5e7eb] rounded-2xl px-5 py-4 outline-none text-lg"
-            />
+              <Search
+                size={18}
+                className="text-gray-400"
+              />
 
-            {/* Search Button */}
-            <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-10 py-4 rounded-2xl text-lg font-semibold transition">
+              <input
+                type="text"
+                placeholder="Job title or company"
+                value={search}
+                onChange={(e) =>
+                  setSearch(e.target.value)
+                }
+                className="w-full px-3 outline-none bg-transparent"
+              />
+            </div>
+
+            {/* Location */}
+            <div className="flex items-center flex-1 border border-gray-200 rounded-xl px-4 h-[54px]">
+
+              <MapPin
+                size={18}
+                className="text-gray-400"
+              />
+
+              <input
+                type="text"
+                placeholder="Location"
+                value={location}
+                onChange={(e) =>
+                  setLocation(e.target.value)
+                }
+                className="w-full px-3 outline-none bg-transparent"
+              />
+            </div>
+
+            {/* Button */}
+            <button className="bg-[#5b4df5] hover:bg-[#4f46e5] text-white px-8 h-[54px] rounded-xl font-semibold transition">
+
               Search
             </button>
           </div>
         </div>
       </section>
 
-      {/* Jobs Section */}
-      <section className="bg-white py-20">
+      {/* JOBS */}
+      <section className="bg-white py-16">
 
         <div className="max-w-7xl mx-auto px-6">
 
-          {/* Heading */}
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
+          {/* Top */}
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
 
+            {/* Left */}
             <div>
-              <h2 className="text-[42px] font-bold text-[#0f172a]">
+
+              <h2 className="text-4xl font-bold text-gray-900">
+
                 Available Jobs
               </h2>
 
-              <p className="text-[#64748b] mt-3 text-lg">
-                Showing {filteredJobs.length} available opportunities
+              <p className="text-gray-500 mt-3">
+
+                Showing {filteredJobs.length} opportunities
               </p>
             </div>
 
-            {/* Filter Buttons */}
-            <div className="flex gap-4 mt-6 md:mt-0">
+            {/* Filters */}
+            <div className="flex flex-wrap gap-3">
 
-              {/* All */}
-              <button
-                onClick={() => setFilter("All")}
-                className={`px-6 py-3 rounded-2xl font-semibold transition ${
-                  filter === "All"
-                    ? "bg-[#5b4df5] text-white"
-                    : "border border-[#d4d4d8] hover:border-[#5b4df5] hover:text-[#5b4df5]"
-                }`}
-              >
-                All
-              </button>
+              {[
+                "All",
+                "Full Time",
+                "Remote",
+                "Internship",
+              ].map((type, index) => (
 
-              {/* Full Time */}
-              <button
-                onClick={() => setFilter("Full Time")}
-                className={`px-6 py-3 rounded-2xl font-semibold transition ${
-                  filter === "Full Time"
-                    ? "bg-[#5b4df5] text-white"
-                    : "border border-[#d4d4d8] hover:border-[#5b4df5] hover:text-[#5b4df5]"
-                }`}
-              >
-                Full Time
-              </button>
-
-              {/* Remote */}
-              <button
-                onClick={() => setFilter("Remote")}
-                className={`px-6 py-3 rounded-2xl font-semibold transition ${
-                  filter === "Remote"
-                    ? "bg-[#5b4df5] text-white"
-                    : "border border-[#d4d4d8] hover:border-[#5b4df5] hover:text-[#5b4df5]"
-                }`}
-              >
-                Remote
-              </button>
+                <button
+                  key={index}
+                  onClick={() => setFilter(type)}
+                  className={`px-5 py-2.5 rounded-xl font-medium transition ${
+                    filter === type
+                      ? "bg-[#5b4df5] text-white"
+                      : "border border-gray-200 hover:border-[#5b4df5] hover:text-[#5b4df5]"
+                  }`}
+                >
+                  {type}
+                </button>
+              ))}
             </div>
           </div>
 
-          {/* Job Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
 
             {filteredJobs.length > 0 ? (
+
               filteredJobs.map((job) => (
-                <JobCard key={job._id} job={job} />
+                <JobCard
+                  key={job._id}
+                  job={job}
+                />
               ))
+
             ) : (
+
               <div className="col-span-full text-center py-20">
 
-                <h3 className="text-3xl font-bold text-slate-700">
+                <h3 className="text-3xl font-bold text-gray-800">
+
                   No Jobs Found
                 </h3>
 
-                <p className="text-slate-500 mt-4">
+                <p className="text-gray-500 mt-4">
+
                   Try searching with different keywords.
                 </p>
               </div>
